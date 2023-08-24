@@ -10,6 +10,34 @@ export const darkTheme = createTheme({
       default: darkGradient
     }
   },
+  components: {
+    MuiTextField: {
+      variants: [
+        {
+          props: { variant: "outlined" },
+          style: {
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: 'transparent', // Ajusta el borde del `TextField`
+              },
+              '&:hover fieldset': {
+                borderColor: 'transparent', // Ajusta el borde cuando se pasa el mouse por encima
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: 'transparent', // Ajusta el borde cuando el `TextField` está enfocado
+              },
+              '& .MuiInputBase-input': {
+                padding: '10px 14px',   // Ajustar el padding si es necesario
+                verticalAlign: 'middle',
+              },
+            },
+            backgroundColor: '#1A1A1A',
+            borderRadius: '15px',
+          }
+        }
+      ]
+    }
+  }
 });
 
 export const lightTheme = createTheme({

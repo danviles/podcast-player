@@ -2,7 +2,7 @@ import React from 'react'
 
 const PodcastSearchPage = () => {
   return (
-    <div>PodcastSearchPage</div>
+    <div className='bg-red-300'>PodcastSearchPage</div>
   )
 }
 
