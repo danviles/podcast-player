@@ -1,9 +1,21 @@
-import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom";
+import { useTheme } from "@mui/material";
 
 const MainLayout = () => {
-  return (
-    <Outlet />
-  )
-}
+  const theme = useTheme();
 
-export default MainLayout
+  const mainStyle = {
+    backgroundImage:  theme.palette.background.default
+  };
+
+  return (
+    <main
+      className="h-screen"
+      style={mainStyle} 
+    >
+      <Outlet />
+    </main>
+  );
+};
+
+export default MainLayout;
