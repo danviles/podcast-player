@@ -1,8 +1,11 @@
 import React from 'react'
+import PlayThumbnail from '../thumbnail/PlayThumbnail'
 
 const PodcastSearchPage = () => {
   return (
-    <div className='bg-red-300'>PodcastSearchPage</div>
+    <section className='flex flex-col'>
+      <PlayThumbnail />
+    </section>
   )
 }
 

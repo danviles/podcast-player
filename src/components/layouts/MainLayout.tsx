@@ -11,8 +11,8 @@ const MainLayout = () => {
 
   return (
     <div className="h-screen" style={mainStyle}>
-      <main className="flex flex-col justify-center mx-14">
-        <header className="py-[30px] px-10">
+      <main className="flex flex-col justify-center mx-20">
+        <header className="py-[30px]">
           {/* Search bar */}
           <SearchBar />
         </header>

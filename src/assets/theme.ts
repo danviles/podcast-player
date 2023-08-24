@@ -17,15 +17,6 @@ export const darkTheme = createTheme({
           props: { variant: "outlined" },
           style: {
             '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: 'transparent', // Ajusta el borde del `TextField`
-              },
-              '&:hover fieldset': {
-                borderColor: 'transparent', // Ajusta el borde cuando se pasa el mouse por encima
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: 'transparent', // Ajusta el borde cuando el `TextField` está enfocado
-              },
               '& .MuiInputBase-input': {
                 padding: '10px 14px',   // Ajustar el padding si es necesario
                 verticalAlign: 'middle',
@@ -36,7 +27,23 @@ export const darkTheme = createTheme({
           }
         }
       ]
-    }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent", // Esto quita el borde
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent", // Esto quita el borde al pasar el mouse
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent", // Esto quita el borde cuando está enfocado
+          },
+        },
+      },
+    },
+    
   }
 });
 
