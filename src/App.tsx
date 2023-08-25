@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
 import { darkTheme, lightTheme } from "./assets/theme.js";
@@ -6,9 +7,10 @@ import PodcastSearchPage from "./components/pages/PodcastSearchPage";
 import PodcastViewPage from "./components/pages/PodcastViewPage";
 
 function App() {
+  const [themeMode, setThemeMode] = useState(false);
   return (
     <BrowserRouter>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={themeMode ? lightTheme : darkTheme}>
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<PodcastSearchPage />} />
