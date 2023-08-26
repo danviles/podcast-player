@@ -14,13 +14,15 @@ const MainLayout = () => {
   }, [theme.palette.background.default]);
 
   return (
-    <main className="flex flex-col justify-center mx-20">
-      <header className="py-[30px]">
+    <>
+      <header className="py-[30px] mx-32">
         {/* Search bar */}
         <SearchBar />
       </header>
-      <Outlet />
-    </main>
+      <main className="flex flex-col justify-center mx-32">
+        <Outlet />
+      </main>
+    </>
   );
 };
 

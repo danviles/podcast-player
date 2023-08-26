@@ -12,10 +12,10 @@ const SarchOrderBy = () => {
     setOrderList(event.target.value);
   };
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center -mr-3">
       <SearchIcon className="text-white"/>
       <FormControl
-        sx={{ display: "flex", m: 1, minWidth: 120 }}
+        sx={{ display: "flex", my: 1, minWidth: 120 }}
       >
         <InputLabel id="orderByLabel">Order By</InputLabel>
         <Select
