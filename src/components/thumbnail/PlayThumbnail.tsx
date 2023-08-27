@@ -1,7 +1,7 @@
 import React from 'react'
 import PauseIcon from '@mui/icons-material/Pause';
 import SarchOrderBy from './SarchOrderBy'
-import Verify from '../../assets/SVG/Verify'
+import Verify from '../../assets/SVG/VerifySVG'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const PlayThumbnail = () => {
