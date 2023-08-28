@@ -3,10 +3,11 @@ import { useTheme } from "@mui/material";
 import SearchBar from "../search/SearchBar";
 import { useEffect } from "react";
 import BottomPlayBar from "../playbar/BottomPlayBar";
-
+import { usePodcastContext } from "../../hooks/usePodcast";
 
 const MainLayout = () => {
   const theme = useTheme();
+  const { currentEpisode } = usePodcastContext();
 
   useEffect(() => {
     document.body.style.backgroundImage = theme.palette.background.default;
@@ -24,8 +25,8 @@ const MainLayout = () => {
       <main className="flex flex-col justify-center mx-32">
         <Outlet />
       </main>
-      <div className="z-10">
-        <BottomPlayBar />
+      <div className="sticky bottom-0 z-10">
+        {currentEpisode ? <BottomPlayBar /> : null}
       </div>
     </>
   );

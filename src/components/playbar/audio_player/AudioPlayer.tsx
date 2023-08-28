@@ -1,25 +1,25 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Box } from "@mui/material";
-import Slider from "@mui/material/Slider";
-import ShufleSVG from "../../../assets/SVG/ShufleSVG";
-import StepBackSVG from "../../../assets/SVG/StepBackSVG";
-import StepForwardSVG from "../../../assets/SVG/StepForwardSVG";
-import RotateSVG from "../../../assets/SVG/RotateSVG";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import VolumeSVG from "../../../assets/SVG/VolumeSVG";
+import React, { useEffect, useState, useRef } from 'react';
+import { Box } from '@mui/material';
+import Slider from '@mui/material/Slider';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { usePodcastContext } from '../../../hooks/usePodcast';
+import { format } from 'date-fns';
+
+const convertDurationToSeconds = (durationString) => {
+  const [hours, minutes, seconds] = durationString.split(':').map(Number);
+  return (hours * 3600) + (minutes * 60) + seconds;
+};
 
 const formatTime = (time) => {
-  const mins = Math.floor(time / 60)
-    .toString()
-    .padStart(2, "0");
-  const secs = (time % 60).toString().padStart(2, "0");
-  return `${mins}:${secs}`;
+  const date = new Date(0, 0, 0, 0, 0, time, 0);
+  return format(date, 'HH:mm:ss');
 };
 
 const AudioPlayer = () => {
+  const { currentEpisode } = usePodcastContext();
   const [playing, setPlaying] = useState(false);
   const [position, setPosition] = useState(0);
-  const [duration, setDuration] = useState(57);
+  const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const audioRef = useRef(null);
 
@@ -30,12 +30,18 @@ const AudioPlayer = () => {
       setPosition(Math.floor(audioObj.currentTime));
     };
 
-    audioObj.addEventListener("timeupdate", handleTimeUpdate);
+    if (currentEpisode && currentEpisode.itunes && currentEpisode.itunes.duration) {
+      const newDuration = convertDurationToSeconds(currentEpisode.itunes.duration);
+      setDuration(newDuration);
+    }
+
+    audioObj.addEventListener('timeupdate', handleTimeUpdate);
     audioObj.volume = volume;
+
     return () => {
-      audioObj.removeEventListener("timeupdate", handleTimeUpdate);
+      audioObj.removeEventListener('timeupdate', handleTimeUpdate);
     };
-  }, [volume]);
+  }, [currentEpisode, volume]);
 
   const handleVolumeChange = (event, newValue) => {
     setVolume(newValue);
@@ -59,23 +65,19 @@ const AudioPlayer = () => {
 
   return (
     <div className="flex justify-between items-center gap-4 w-full pr-2">
-      {/* Controles */}
+      {/* ... Aquí tus otros controles y SVGs */}
       <div className="flex justify-center items-center gap-4">
-        <ShufleSVG />
-        <StepBackSVG />
+        {/* ... Tus otros íconos SVG */}
         <div className="flex justify-center items-center w-[45px] h-[45px] bg-[#5C67DE] rounded-full">
           <button onClick={togglePlayPause}>
-            <PlayArrowIcon
-              className="text-white"
-              sx={{ height: "24px", width: "24px" }}
-            />
+            <PlayArrowIcon className="text-white" sx={{ height: '24px', width: '24px' }} />
           </button>
         </div>
-        <StepForwardSVG />
-        <RotateSVG />
+        {/* ... Tus otros íconos SVG */}
       </div>
+
       {/* Slider de sonido */}
-      <div className="w-full" >
+      <div className="w-full">
         <div className="flex justify-between items-center gap-5 text-white">
           <span>{formatTime(position)}</span>
           <Slider
@@ -87,14 +89,13 @@ const AudioPlayer = () => {
           <span>{formatTime(duration)}</span>
         </div>
       </div>
-      <audio
-        ref={audioRef}
-        src="https://anchor.fm/s/29b19cec/podcast/play/16008927/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2020-6-2%2F87007506-44100-2-e30a79f43bef7.m4a"
-      ></audio>
+
+      <audio ref={audioRef} src={currentEpisode?.enclosure.url}></audio>
+
       {/* Slider de volumen */}
       <Box width={300}>
         <div className="flex justify-between items-center gap-2 text-white pr-5">
-          <VolumeSVG />
+          {/* ... Tu ícono SVG para el volumen */}
           <Slider
             size="small"
             value={volume}

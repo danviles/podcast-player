@@ -5,18 +5,21 @@ import { darkTheme, lightTheme } from "./assets/theme.js";
 import MainLayout from "./components/layouts/MainLayout";
 import PodcastSearchPage from "./components/pages/PodcastSearchPage";
 import PodcastViewPage from "./components/pages/PodcastViewPage";
+import { PodcastProvider } from "./context/PodcastProvider.js";
 
 function App() {
   const [themeMode, setThemeMode] = useState(false);
   return (
     <BrowserRouter>
       <ThemeProvider theme={themeMode ? lightTheme : darkTheme}>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<PodcastSearchPage />} />
-            <Route path="podcast/:id" element={<PodcastViewPage />} />
-          </Route>
-        </Routes>
+        <PodcastProvider>
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<PodcastSearchPage />} />
+              <Route path="podcast" element={<PodcastViewPage />} />
+            </Route>
+          </Routes>
+        </PodcastProvider>
       </ThemeProvider>
     </BrowserRouter>
   );

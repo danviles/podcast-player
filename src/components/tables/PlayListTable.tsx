@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,28 +7,20 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { usePodcastContext } from '../../hooks/usePodcast';
+import { defaultFormatDate } from '../../helpers/formatDates';
+import { PodcastRSS } from '../../interfaces/interfaces';
 
-function createData(
-  name: string,
-  description: string,
-  released: string,
-  duration: string,
-) {
-  return { name, description, released, duration };
-}
 
-const rows = [
-  createData('Frozen yoghurt', 'Podcast cool', 'today', '21:00'),
-  createData('Frozen yoghurt', 'Podcast cool', 'today', '21:00'),
-  createData('Frozen yoghurt', 'Podcast cool', 'today', '21:00'),
-  createData('Frozen yoghurt', 'Podcast cool', 'today', '21:00'),
-  createData('Frozen yoghurt', 'Podcast cool', 'today', '21:00'),
-  createData('Frozen yoghurt', 'Podcast cool', 'today', '21:00'),
-  createData('Frozen yoghurt', 'Podcast cool', 'today', '21:00'),
-  createData('Frozen yoghurt', 'Podcast cool', 'today', '21:00'),
-];
 
 const PlayListTable = () => {
+
+  const { currentPodcast, setCurrentEpisode } = usePodcastContext()
+
+  const handleSetPlayUrl = (episode: PodcastRSS) => {
+    setCurrentEpisode(episode)
+  }
+
   return (
     <TableContainer component={Table}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -42,25 +34,25 @@ const PlayListTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {currentPodcast?.map((episode) => (
             <TableRow
-              key={row.name}
+              key={episode.title}
             >
               <TableCell>
-                <PlayArrowIcon />
+                <PlayArrowIcon onClick={ () => handleSetPlayUrl(episode)}/>
               </TableCell>
               <TableCell>
                 <div className='flex items-center gap-2'>
-                  <img className='w-[45px] h-[45px] rounded-md' src="https://is1-ssl.mzstatic.com/image/thumb/Video126/v4/3c/02/1c/3c021c34-851d-bb7f-b426-d62683a4ac42/SPE_SPIDERMAN_ATS_TH_FINAL_ITUNES_WW_ARTWORK_EN_2000x3000_3TUF3R000066S7.lsr/100x100bb.jpg" alt="" />
+                  <img className='w-[45px] h-[45px] rounded-md' src={episode.itunes.image} alt="" />
                   <div className='flex flex-col'>
-                    <p>{row.name}</p>
-                    <p>Ken Adams</p>
+                    <p>{episode.title}</p>
+                    <p>{episode.creator}</p>
                   </div>
                 </div>
               </TableCell>
-              <TableCell>{row.description}</TableCell>
-              <TableCell>{row.released}</TableCell>
-              <TableCell>{row.duration}</TableCell>
+              <TableCell>{episode.creator}</TableCell>
+              <TableCell>{ defaultFormatDate(episode.pubDate) }</TableCell>
+              <TableCell>{episode.itunes.duration}</TableCell>
             </TableRow>
           ))}
         </TableBody>
