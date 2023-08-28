@@ -18,6 +18,7 @@ La aplicación integra una serie de tecnologías, bibliotecas y patrones de dise
 - [Tailwind CSS](https://tailwindcss.com/) y [Material UI](https://mui.com/): Para el diseño de la interfaz de usuario y la implementación de temas.
 
 ### En Desarrollo
+- Ordenar los resultados.
 - Diseño responsive.
 - Controles del reproductor
 - Pantallas de carga.
