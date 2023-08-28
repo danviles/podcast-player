@@ -1,33 +1,50 @@
-# React + TypeScript + Vite
+# iTunes Podcast Player
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![App screenshot](/src/assets/images/image-1.png)
 
-Currently, two official plugins are available:
+Una aplicación web construida con React y TypeScript para buscar y reproducir podcasts de iTunes de manera eficiente y elegante.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Información Técnica
 
-## Expanding the ESLint configuration
+### Características
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+La aplicación integra una serie de tecnologías, bibliotecas y patrones de diseño avanzados, incluyendo:
 
-- Configure the top-level `parserOptions` property like this:
+- [React Router Dom v6](https://reactrouter.com/): Para el enrutamiento de la aplicación.
+- [Tanstack Query](https://tanstack.com/query/latest/) y [Axios](https://axios-http.com/): Para el manejo de datos asíncronos y la gestión de caché.
+- [Context API](https://reactjs.org/docs/context.html) con [Reducer](https://reactjs.org/docs/hooks-reference.html#usereducer): Para el estado global y la administración del flujo de datos.
+- [Date-fns](https://date-fns.org/): Utilizado para el formato de fechas y horas.
+- [RSS-parser](https://www.npmjs.com/package/rss-parser) y [allorigins.win](https://www.allorigins.win/): Para el parsing y la obtención de información RSS de los podcasts.
+- [Tailwind CSS](https://tailwindcss.com/) y [Material UI](https://mui.com/): Para el diseño de la interfaz de usuario y la implementación de temas.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+### En Desarrollo
+- Diseño responsive.
+- Controles del reproductor
+- Pantallas de carga.
+- Soporte para temas oscuros y claros.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Bugs Conocidos
 
-Peticiones: 
+La aplicación tiene ciertas limitaciones y bugs, especialmente en lo que respecta al diseño responsive y la actualización de estados que hacen que algunos botones no cambien dando como resultado una mala experiencia de usuario. Adicionalmente, debido a inconsistencias en el formato de tiempo RSS ("00:00:00" es el único aceptado actualmente), algunas funcionalidades pueden verse afectadas. Estos problemas se están abordando.
 
-Busqueda de podcasts : 
-https://itunes.apple.com/search?term=elvis david&media=podcast&limit=25&offset=0
+## Instalación y Pruebas
 
+Para probar la aplicación localmente, sigue estos pasos:
+
+1. Clona el repositorio en tu máquina local.
+2. Ejecuta `npm install` en la raíz del proyecto para instalar todas las dependencias necesarias.
+3. Ejecuta `npm run dev` para iniciar un servidor de desarrollo local. Se mostrará en la consola la dirección y puerto para acceder a la aplicación.
+
+## Demo
+
+Puedes encontrar una versión en vivo de la aplicación [aquí](Link_aplicacion).
+
+## Autor
+
+Creado por [Elvis Nogueiras](https://github.com/danviles).
+
+Para cualquier pregunta o comentario, no dudes en contactarme a través de [LinkedIn](https://www.linkedin.com/in/elvis-nogueiras/).
+
+---
+
+© 2023 Elvis Nogueiras. Todos los derechos reservados.
