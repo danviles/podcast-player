@@ -37,7 +37,7 @@ Para probar la aplicación localmente, sigue estos pasos:
 
 ## Demo
 
-Puedes encontrar una versión en vivo de la aplicación [aquí](Link_aplicacion).
+Puedes encontrar una versión en vivo de la aplicación [aquí](https://elegant-dasik-096001.netlify.app).
 
 ## Autor
 
