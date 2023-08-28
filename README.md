@@ -35,6 +35,14 @@ Para probar la aplicación localmente, sigue estos pasos:
 2. Ejecuta `npm install` en la raíz del proyecto para instalar todas las dependencias necesarias.
 3. Ejecuta `npm run dev` para iniciar un servidor de desarrollo local. Se mostrará en la consola la dirección y puerto para acceder a la aplicación.
 
+### Tests
+
+Ejecuta `npm run test` para iniciar las pruebas E2E en cypress.
+
+![Tests](/src/assets/images/image-2.png)
+
+
+
 ## Demo
 
 Puedes encontrar una versión en vivo de la aplicación [aquí](https://elegant-dasik-096001.netlify.app).
