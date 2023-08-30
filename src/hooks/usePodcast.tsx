@@ -7,7 +7,6 @@ import axiosClient from "../config/axiosClient";
 import axios from "axios";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useNavigate } from 'react-router-dom';
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const parser = new Parser();
 
