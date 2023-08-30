@@ -8,8 +8,14 @@ export interface PodcastState {
   searchQuery: string
   currentPodcast: PodcastInterface | null
   currentPodcastEpisodes: PodcastRSS[] | null
-  currentEpisode: PodcastRSS | null
+  currentEpisode: currentEpisode | null
   isPLaying: boolean
+  isShuffle: boolean
+}
+
+export interface currentEpisode {
+  episode: PodcastRSS | null
+  index: number
 }
 
 export interface PodcastRSS {

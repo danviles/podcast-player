@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,6 +6,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import PauseIcon from "@mui/icons-material/Pause";
 import { usePodcastContext } from '../../hooks/usePodcast';
 import { defaultFormatDate } from '../../helpers/formatDates';
 import { PodcastRSS } from '../../interfaces/interfaces';
@@ -15,13 +15,11 @@ import { useAutoAnimate } from '@formkit/auto-animate/react'
 const PlayListTable = () => {
 
   const [parent] = useAutoAnimate()
-  const { currentPodcastEpisodes, setCurrentEpisode } = usePodcastContext()
+  const { currentPodcastEpisodes, currentPodcast, isPLaying, currentEpisode, setCurrentEpisode } = usePodcastContext()
 
-  const handleSetPlayUrl = (episode: PodcastRSS) => {
-    setCurrentEpisode(episode)
+  const handleSetEpisode = (episode: PodcastRSS, index: number) => {
+    setCurrentEpisode({episode, index})
   }
-
-
 
   return (
     <TableContainer component={Table}>
@@ -36,16 +34,22 @@ const PlayListTable = () => {
           </TableRow>
         </TableHead>
         <TableBody ref={parent}>
-          {currentPodcastEpisodes?.map((episode) => (
+          {currentPodcastEpisodes?.map((episode, index) => (
             <TableRow
               key={episode.title}
+              className="cursor-pointer"
+              onClick={ () => handleSetEpisode(episode, index)}
             >
               <TableCell>
-                <PlayArrowIcon onClick={ () => handleSetPlayUrl(episode)}/>
+                {isPLaying && currentEpisode?.episode?.enclosure.url == episode.enclosure.url ? (
+                  <PauseIcon />
+                ) : (
+                  <PlayArrowIcon />
+                )}
               </TableCell>
               <TableCell>
                 <div className='flex items-center gap-2'>
-                  <img className='w-[45px] h-[45px] rounded-md' src={episode.itunes.image} alt="" />
+                  <img className='w-[45px] h-[45px] rounded-md' src={episode.itunes.image ? episode.itunes.image : currentPodcast?.artworkUrl100} alt="" />
                   <div className='flex flex-col'>
                     <p>{episode.title}</p>
                     <p>{episode.creator}</p>

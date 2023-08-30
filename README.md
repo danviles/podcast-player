@@ -18,15 +18,12 @@ La aplicación integra una serie de tecnologías, bibliotecas y patrones de dise
 - [Tailwind CSS](https://tailwindcss.com/) y [Material UI](https://mui.com/): Para el diseño de la interfaz de usuario y la implementación de temas.
 
 ### En Desarrollo
-- Ordenar los resultados.
 - Diseño responsive.
-- Controles del reproductor
-- Pantallas de carga.
 - Soporte para temas oscuros y claros.
 
 ### Bugs Conocidos
 
-La aplicación tiene ciertas limitaciones y bugs, especialmente en lo que respecta al diseño responsive y la actualización de estados que hacen que algunos botones no cambien dando como resultado una mala experiencia de usuario. Adicionalmente, debido a inconsistencias en el formato de tiempo RSS ("00:00:00" es el único aceptado actualmente), algunas funcionalidades pueden verse afectadas. Estos problemas se están abordando.
+La aplicación tiene ciertas limitaciones y bugs, especialmente en lo que respecta al diseño responsive y la actualización de estados que hacen que algunos botones no cambien dando como resultado una mala experiencia de usuario.
 
 ## Instalación y Pruebas
 
@@ -41,7 +38,6 @@ Para probar la aplicación localmente, sigue estos pasos:
 Ejecuta `npm run test` para iniciar las pruebas E2E en cypress.
 
 ![Tests](/src/assets/images/image-2.png)
-
 
 
 ## Demo

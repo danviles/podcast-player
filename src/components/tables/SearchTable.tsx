@@ -38,57 +38,67 @@ const SearchTable = () => {
 
   return (
     <>
-      <TableContainer component={Table}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>#</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Released</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody ref={parent}>
-            {podcasts?.map((podcast) => (
-              <TableRow
-                key={podcast.trackId}
-                onClick={() => handleSelectPodcast(podcast)}
-                className="cursor-pointer"
-              >
-                <TableCell>
-                  <PlayArrowIcon />
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-2">
-                    <img
-                      className="w-[45px] h-[45px] rounded-md"
-                      src={podcast.artworkUrl100}
-                      alt=""
-                    />
-                    <div className="flex flex-col">
-                      <p>{podcast.collectionName}</p>
-                      <p>{podcast.artistName}</p>
-                    </div>
-                  </div>
-                </TableCell>
-                <TableCell>{podcast.shortDescription}</TableCell>
-                <TableCell>{defaultFormatDate(podcast.releaseDate)}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      {getPodcastsQuery.isFetching && (
-        <div className="flex justify-center items-center mt-2">
+      {getRssPodcastQuery.isFetching ? (
+        <div className="flex justify-center items-center h-[300px]">
           <CircularProgress />
         </div>
+      ) : (
+        <>
+          <TableContainer component={Table}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>#</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Description</TableCell>
+                  <TableCell>Released</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody ref={parent}>
+                {podcasts?.map((podcast) => (
+                  <TableRow
+                    key={podcast.trackId}
+                    onClick={() => handleSelectPodcast(podcast)}
+                    className="cursor-pointer"
+                  >
+                    <TableCell>
+                      <PlayArrowIcon />
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <img
+                          className="w-[45px] h-[45px] rounded-md"
+                          src={podcast.artworkUrl100}
+                          alt=""
+                        />
+                        <div className="flex flex-col">
+                          <p>{podcast.collectionName}</p>
+                          <p>{podcast.artistName}</p>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>{podcast.shortDescription}</TableCell>
+                    <TableCell>
+                      {defaultFormatDate(podcast.releaseDate)}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          {getPodcastsQuery.isFetching && (
+            <div className="flex justify-center items-center mt-2">
+              <CircularProgress />
+            </div>
+          )}
+          <Button
+            onClick={() => getPodcastsQuery.fetchNextPage()}
+            disabled={!getPodcastsQuery.hasNextPage}
+          >
+            Load more
+          </Button>
+        </>
       )}
-      <Button
-        onClick={() => getPodcastsQuery.fetchNextPage()}
-        disabled={!getPodcastsQuery.hasNextPage}
-      >
-        Load more
-      </Button>
     </>
   );
 };

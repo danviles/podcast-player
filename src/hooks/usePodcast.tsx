@@ -1,9 +1,11 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import Parser from "rss-parser/dist/rss-parser.min.js";
 import { useContext } from "react";
 import { PodcastContext } from "../context/PodcastContext";
 import axiosClient from "../config/axiosClient";
 import axios from "axios";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import Parser from "rss-parser/dist/rss-parser.min.js";
 import { useNavigate } from 'react-router-dom';
 
 const parser = new Parser();
@@ -45,7 +47,7 @@ export const useGetPodcasts = (query: string) => {
         return pages.length;  // Retorna el número de la próxima página
       },
       onSuccess: (data) => {
-        setPodcats(data.pages.flat());
+        setPodcats(data.pages.flat().filter(podcast => podcast.trackCount <= 500));
       }
       
     }

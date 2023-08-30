@@ -2,6 +2,7 @@ import {
   PodcastInterface,
   PodcastRSS,
   PodcastState,
+  currentEpisode,
 } from "../interfaces/interfaces";
 
 type PodcastAction =
@@ -9,13 +10,16 @@ type PodcastAction =
   | { type: "setSearchQuery"; payload: string }
   | { type: "setCurrentPodcast"; payload: PodcastInterface | null }
   | { type: "setCurrentPodcastEpisodes"; payload: PodcastRSS[] | null }
-  | { type: "setCurrentEpisode"; payload: PodcastRSS | null }
+  | { type: "setCurrentEpisode"; payload: currentEpisode }
   | { type: "ResetPodcastEpisodes" }
   | { type: "sortPodcastsByName" }
   | { type: "sortPodcastsByReleased" }
   | { type: "sortEpisodesByTitle" }
-  | { type: "sortEpisodesByReleased" };
-// | { type: "sortEpisodesByDuration"}
+  | { type: "sortEpisodesByReleased" }
+  | { type: "toggleShuffle" }
+  | { type: "togglePlay"; payload: boolean }
+  | { type: "nextEpisode"; payload: currentEpisode | null }
+  | { type: "backEpisode"; payload: currentEpisode | null };
 
 export const PodcastReducer = (
   state: PodcastState,
@@ -32,7 +36,7 @@ export const PodcastReducer = (
       return {
         ...state,
         searchQuery: action.payload,
-      }
+      };
 
     case "setCurrentPodcast":
       return {
@@ -102,11 +106,31 @@ export const PodcastReducer = (
           : [],
       };
 
-    // case "sortEpisodesByDuration":
-    //   return {
-    //     ...state,
-    //     currentPodcastEpisodes: state.currentPodcastEpisodes?.sort((a, b) => a.itunes.duration - b.itunes.duration) ? state.currentPodcastEpisodes : []
-    //   }
+    case "toggleShuffle":
+      return {
+        ...state,
+        isShuffle: !state.isShuffle,
+      };
+
+    case "togglePlay":	
+      return {
+        ...state,
+        isPLaying: action.payload
+      }
+
+    case "nextEpisode":
+      return {
+        ...state,
+        isPLaying: false,
+        currentEpisode: action.payload,
+      };
+
+    case "backEpisode":
+      return {
+        ...state,
+        isPLaying: false,
+        currentEpisode: action.payload,
+      };
 
     default:
       return state;
