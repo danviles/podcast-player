@@ -7,6 +7,7 @@ import axiosClient from "../config/axiosClient";
 import axios from "axios";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useNavigate } from 'react-router-dom';
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const parser = new Parser();
 
@@ -48,8 +49,9 @@ export const useGetPodcasts = (query: string) => {
       },
       onSuccess: (data) => {
         setPodcats(data.pages.flat().filter(podcast => podcast.trackCount <= 500));
-      }
-      
+      },
+      enabled: query !== "",
+      retry: 1
     }
   );
 };
@@ -60,6 +62,7 @@ export const useGetRssPodcast = (feedUrl: string) => {
   const navigate = useNavigate();
   return useQuery(["rssPodcast", podcastState.currentPodcast?.artistName], () => getRssPodcast(feedUrl), {
     enabled: false,
+    retry: 1,
     onSuccess: (data) => {
       setCurrentPodcastEpisodes(data);
       navigate(`/podcast/`)
