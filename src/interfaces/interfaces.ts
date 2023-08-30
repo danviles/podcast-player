@@ -1,8 +1,15 @@
+export enum TableTypeEnum {
+  'SearchTable',
+  'EpisodeTable',
+}
 
 export interface PodcastState {
   podcasts: PodcastInterface[] | null
-  currentPodcast: PodcastRSS[] | null
+  searchQuery: string
+  currentPodcast: PodcastInterface | null
+  currentPodcastEpisodes: PodcastRSS[] | null
   currentEpisode: PodcastRSS | null
+  isPLaying: boolean
 }
 
 export interface PodcastRSS {
@@ -54,6 +61,7 @@ export interface PodcastInterface {
   artworkUrl30: string
   artworkUrl60: string
   artworkUrl100: string
+  artworkUrl600: string
   collectionPrice?: number
   trackPrice?: number
   collectionHdPrice?: number

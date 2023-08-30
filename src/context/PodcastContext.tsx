@@ -5,8 +5,15 @@ import { PodcastInterface, PodcastRSS, PodcastState } from '../interfaces/interf
 export type PodcastContextProps = {
     podcastState: PodcastState;
     setPodcats: ( podcasts: PodcastInterface[] | null ) => void;
-    setCurrentPodcast: ( podcast: PodcastRSS[] | null ) => void;
+    setCurrentPodcast: ( podcast: PodcastInterface | null ) => void;
+    setCurrentPodcastEpisodes: ( podcastEpisodes: PodcastRSS[] | null ) => void;
     setCurrentEpisode: ( currentEpisode: PodcastRSS | null ) => void;
+    setSearchQuery: ( searchQuery: string ) => void;
+    resetPodcastEpisodes: () => void;
+    ordernPodcastsByReleased: () => void;
+    ordernPodcastsByName: () => void;
+    ordernEpisodesByTitle: () => void;
+    ordernEpisodesByReleased: () => void;
 } 
 
 

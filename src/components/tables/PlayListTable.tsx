@@ -10,16 +10,18 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { usePodcastContext } from '../../hooks/usePodcast';
 import { defaultFormatDate } from '../../helpers/formatDates';
 import { PodcastRSS } from '../../interfaces/interfaces';
-
-
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 const PlayListTable = () => {
 
-  const { currentPodcast, setCurrentEpisode } = usePodcastContext()
+  const [parent] = useAutoAnimate()
+  const { currentPodcastEpisodes, setCurrentEpisode } = usePodcastContext()
 
   const handleSetPlayUrl = (episode: PodcastRSS) => {
     setCurrentEpisode(episode)
   }
+
+
 
   return (
     <TableContainer component={Table}>
@@ -33,8 +35,8 @@ const PlayListTable = () => {
             <TableCell><AccessTimeIcon/></TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {currentPodcast?.map((episode) => (
+        <TableBody ref={parent}>
+          {currentPodcastEpisodes?.map((episode) => (
             <TableRow
               key={episode.title}
             >
@@ -58,6 +60,7 @@ const PlayListTable = () => {
         </TableBody>
       </Table>
     </TableContainer>
+
   )
 }
 
