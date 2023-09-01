@@ -44,6 +44,10 @@ Ejecuta `npm run test` para iniciar las pruebas E2E en cypress.
 
 Puedes encontrar una versión en vivo de la aplicación [aquí](https://elegant-dasik-096001.netlify.app).
 
+## Proyectos similares
+
+- [Top 100 Podcasts - JavaScript](https://github.com/danviles/indi-podcast-player)
+
 ## Autor
 
 Creado por [Elvis Nogueiras](https://github.com/danviles).
